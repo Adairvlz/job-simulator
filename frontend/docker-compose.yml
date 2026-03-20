@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  frontend:
+    build: .
+    ports:
+      - "8088:80"
+    volumes:
+      - ./public:/usr/share/nginx/html:ro
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: .
+      dockerfile: ../resources/Dockerfile.javascript
+    ports:
+      - "8080:3000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: jobsimulator
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+volumes:
+  postgres_data:
