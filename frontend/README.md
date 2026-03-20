@@ -110,7 +110,6 @@ La evaluación es **pasa o no pasa**. Indicar el nivel seleccionado al momento d
 - La aplicación maneja correctamente los errores de conexión a la base de datos
 - El servicio de la aplicación no inicia hasta que PostgreSQL esté disponible
 
----
 
 ### Nivel 3 — Senior `(máximo 100/100)`
 
